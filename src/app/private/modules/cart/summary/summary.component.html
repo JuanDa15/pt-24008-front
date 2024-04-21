@@ -1,0 +1,28 @@
+<h1>Order: {{ cartService.currentOrder()?._id }}</h1>
+<small>{{ cartService.currentOrder()?.created }}</small>
+
+@if (isAdmin) {
+<div>
+  <p>{{ cartService.currentOrder()?.user?.name }}</p>
+  <p>
+    <b>{{ cartService.currentOrder()?.user?.email }}</b>
+  </p>
+</div>
+} @for (item of cartService.currentOrder()?.products; track item._id) {
+<div>
+  <h3>{{ item.product.name }}</h3>
+  <hr />
+  <p>{{ item.product.description }}</p>
+
+  <div>
+    Quantity: {{ item.quantity }} Ppu: {{ item.product.price }} total:
+    {{ item.quantity * item.product.price }}
+  </div>
+</div>
+}
+
+<h2>Order status: {{ cartService.currentOrder()?.status }}</h2>
+
+@if ((cartService.currentOrder()?.products ?? []).length > 0) {
+<p>TOTAL: {{ cartService.currentOrder()?.products | totalOrder }}</p>
+}

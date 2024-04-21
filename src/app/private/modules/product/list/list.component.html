@@ -1,0 +1,26 @@
+<h1>Product list</h1>
+
+@if (isAdmin) {
+<button type="button" routerLink="/app/product">Create</button>
+} @for (item of productService.products(); track item._id) {
+<div>
+  <h3>{{ item.name }}</h3>
+  <hr />
+  <p>{{ item.description }}</p>
+
+  <label>
+    <b>{{ item.stock }} Units</b>
+  </label>
+
+  <p>{{ item.price | currency }}</p>
+
+  @if (isAdmin) {
+  <button type="button" [routerLink]="'/app/product/' + item._id">Edit</button>
+  <button type="button" (click)="deleteProduct(item)">Delete</button>
+  }
+
+  <button type="button" (click)="cartService.addToCart(item, 1)">
+    Add to Cart
+  </button>
+</div>
+}

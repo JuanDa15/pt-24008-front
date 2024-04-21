@@ -21,7 +21,15 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@router/*": ["./src/router/*"],
+      "@public/*": ["./src/app/public/*"],
+      "@private/*": ["./src/app/private/*"],
+      "@environments/*": ["./src/environments/*"],
+      "@API/*": ["./src/app/API/*"],
+      "@interfaces/*": ["./src/app/interfaces/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

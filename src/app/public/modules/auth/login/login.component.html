@@ -1,0 +1,9 @@
+<h1>Login</h1>
+
+<form [formGroup]="form" (ngSubmit)="login()">
+  <input placeholder="Email" type="email" formControlName="email" />
+  <input placeholder="********" type="password" formControlName="password" />
+  <button type="submit">Iniciar sesión</button>
+</form>
+
+<a routerLink="/auth/register">Registrarse</a>

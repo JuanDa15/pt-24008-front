@@ -1,0 +1,43 @@
+<h1>COMPLETE YOUR ORDER</h1>
+
+<!-- QUE SI NO HAY ITEMS SE MUESTRE UN MENSAJE -->
+
+@if (cartService.cart$ | async; as cart) { @for (item of cart; track
+item.product._id) {
+<div>
+  <h4>{{ item.product.name }}</h4>
+  <hr />
+  <p>{{ item.product.description }}</p>
+  <p>{{ item.product.price }}</p>
+  <button type="button" (click)="cartService.removeFromCart(item.product)">
+    Delete
+  </button>
+  <div>
+    <button
+      type="button"
+      (click)="cartService.addToCart(item.product, 1)"
+      [disabled]="item.quantity >= item.product.stock"
+    >
+      +
+    </button>
+    <p>
+      {{ item.quantity }}
+    </p>
+    <button
+      type="button"
+      [disabled]="item.quantity === 1"
+      (click)="cartService.addToCart(item.product, -1)"
+    >
+      -
+    </button>
+  </div>
+</div>
+}
+
+<h4>Total: {{ cartService.total }}</h4>
+
+<button type="button" (click)="submit()" [disabled]="cart.length === 0">
+  Order
+</button>
+
+}

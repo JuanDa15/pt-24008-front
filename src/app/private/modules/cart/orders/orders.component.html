@@ -1,0 +1,22 @@
+<h1>Orders</h1>
+
+@for (item of cartService.orders(); track item._id) {
+<div [routerLink]="'/app/cart/' + item._id">
+  <h3>Order: {{ item._id }}</h3>
+  @if (item.user.name) {
+  <small
+    ><b>{{ item.user.name }} - {{ item.user.email }}</b></small
+  >
+  }
+  <br />
+  <small>created: {{ item.created }}</small>
+  <hr />
+  <p>
+    total product: <b>{{ item.products.length }}</b>
+  </p>
+  <p>
+    total elements: <b>{{ item.products | totalElements }}</b>
+  </p>
+  <label>{{ item.status }}</label>
+</div>
+}

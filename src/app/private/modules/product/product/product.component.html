@@ -1,0 +1,13 @@
+<h1>{{ isEditView() ? "Edit" : "Create" }} Product</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <input placeholder="name" type="text" formControlName="name" />
+  <textarea placeholder="description" formControlName="description"></textarea>
+  <input type="number" placeholder="Price" formControlName="price" />
+  <input type="number" placeholder="Stock" formControlName="stock" />
+  <button type="submit">{{ isEditView() ? "Edit" : "Create" }}</button>
+</form>
+
+@if (isEditView()) {
+<button type="button" (click)="deleteProduct()">Delete Product</button>
+}
