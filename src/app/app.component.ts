@@ -2,7 +2,7 @@ import { RenewService } from '@API/auth/renew.service';
 import { CartManagerService } from '@shared/services/cart.service';
 import { SessionService } from '@API/session.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { LoginResponse, ServerResponse } from '@interfaces/shared.interface';
 import { CloudinaryService } from '@shared/services/cloudinary.service';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   private _router = inject(Router)
   public sessionService = inject(SessionService)
   public renewSession = inject(RenewService)
+  public ar = inject(ActivatedRoute)
   public cartService = inject(CartManagerService)
   public cloudinary = inject(CloudinaryService)
 
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit {
     const token = localStorage.getItem(this.sessionService.STORAGE_TOKEN)
 
     if (!token) {
-      // this._router.navigateByUrl('/auth/login', { replaceUrl: true })
+      const redirectUrl = window.location.pathname.includes('app') ? '/auth/login' : (window.location.pathname.includes('auth')) ? window.location.pathname : '/auth/login'
+      this._router.navigateByUrl(redirectUrl, { replaceUrl: true })
       return;
     }
 

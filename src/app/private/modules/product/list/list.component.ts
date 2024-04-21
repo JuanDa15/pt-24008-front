@@ -38,7 +38,7 @@ export class ListComponent extends Permissions implements OnInit {
         this.productService.products.set(data)
       })
     ).subscribe({
-      next: (products) => console.log(products),
+      next: () => { },
     })
   }
 
