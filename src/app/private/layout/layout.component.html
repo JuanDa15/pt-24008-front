@@ -1,5 +1,39 @@
-<p>private layout works!</p>
-<button type="button" (click)="logOut()">LogOut</button>
-<button routerLink="/app/cart">Cart</button>
-<button routerLink="/app/cart/orders">Orders</button>
-<router-outlet />
+<mat-drawer-container style="min-height: 100%" autosize>
+  <mat-drawer #drawer mode="side" style="min-width: 200px">
+    <app-menu />
+  </mat-drawer>
+
+  <mat-drawer-content style="min-height: 100vh">
+    <section>
+      <mat-toolbar>
+        <button
+          mat-icon-button
+          aria-label="menu-button"
+          (click)="isSmallScreen ? openMenu() : drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>PT24008</span>
+        <span class="example-spacer" style="flex: 1 1 auto"></span>
+        <button
+          mat-icon-button
+          aria-label="Go to cart"
+          matTooltip="Go to cart"
+          routerLink="/app/cart"
+        >
+          <mat-icon
+            [matBadge]="cartService.cart.length"
+            matBadgeSize="small"
+            [matBadgeOverlap]="true"
+            aria-hidden="false"
+            >shopping_cart</mat-icon
+          >
+        </button>
+      </mat-toolbar>
+
+      <div class="content-container" style="padding: 1rem; height: 100%">
+        <router-outlet />
+      </div>
+    </section>
+  </mat-drawer-content>
+</mat-drawer-container>

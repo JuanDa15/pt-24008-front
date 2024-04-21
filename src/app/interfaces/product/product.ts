@@ -3,6 +3,7 @@ export interface ProductDTO {
   price: number;
   description: string;
   stock: number;
+  image?: string;
 }
 
 export interface Product extends ProductDTO {

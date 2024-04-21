@@ -1,0 +1,38 @@
+.cart-item {
+  max-width: 600px;
+  margin: 0 auto;
+  .cart-item-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    img {
+      border-radius: 4px;
+    }
+
+    .price {
+      font-size: 2rem;
+      margin: 1rem 0;
+      font-weight: 500;
+    }
+  }
+}
+
+.quantity-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+
+  .quantity {
+    padding: 0.3rem;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: text;
+  }
+}

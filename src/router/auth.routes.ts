@@ -1,9 +1,11 @@
 import { Routes } from "@angular/router";
 import { noSessionGuardGuard } from "../app/guards/no-session-guard.guard";
+import { AuthLayoutComponent } from "@public/modules/auth/auth-layout/auth-layout.component";
 
 export const AuthRoutes: Routes = [
   {
     path: '',
+    component: AuthLayoutComponent,
     children: [
       {
         path: 'login',
@@ -15,6 +17,15 @@ export const AuthRoutes: Routes = [
         canMatch: [noSessionGuardGuard],
         loadComponent: () => import('@public/modules/auth/register/register.component').then(c => c.RegisterComponent)
       },
+      {
+        path: 'register-admin',
+        canMatch: [noSessionGuardGuard],
+        loadComponent: () => import('@public/modules/auth/register/register.component').then(c => c.RegisterComponent)
+      },
+      {
+        path: '**',
+        redirectTo: 'login'
+      }
     ]
   }
 ]

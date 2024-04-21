@@ -1,0 +1,54 @@
+<mat-card class="cart-item">
+  <mat-card-content class="cart-item-content">
+    <img [src]="cartItem.product.image" width="100px" height="100px" />
+    <div style="flex: 1 1 auto">
+      <mat-card-header>
+        <mat-card-title>{{ cartItem.product.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <hr />
+        <p>{{ cartItem.product.description }}</p>
+        <p class="price">
+          $ {{ cartItem.product.price | currency : "COP" : "" : ".0-0" }} unit
+        </p>
+        @if (showControls) {
+        <mat-card-actions>
+          <div class="quantity-controls">
+            <button
+              type="button"
+              mat-icon-button
+              (click)="cartService.addToCart(cartItem.product, 1)"
+              [disabled]="cartItem.quantity >= cartItem.product.stock"
+              aria-label="Add one"
+              matTooltip="Add One"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+            <span class="quantity">{{ cartItem.quantity }}</span>
+            <button
+              type="button"
+              mat-icon-button
+              [disabled]="cartItem.quantity === 1"
+              (click)="cartService.addToCart(cartItem.product, -1)"
+              aria-label="Remove one"
+              matTooltip="Remove one"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+          <span class="example-spacer" style="flex: 1 1 auto"></span>
+          <button
+            type="button"
+            mat-icon-button
+            color="accent"
+            (click)="cartService.removeFromCart(cartItem.product)"
+            matTooltip="Remove from cart"
+            aria-label="Remove from cart"
+          >
+            <mat-icon>delete</mat-icon>
+          </button> </mat-card-actions
+        >}
+      </mat-card-content>
+    </div>
+  </mat-card-content>
+</mat-card>

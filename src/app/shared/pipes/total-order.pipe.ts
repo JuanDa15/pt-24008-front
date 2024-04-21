@@ -7,7 +7,7 @@ import { ProductElement } from '@interfaces/cart/order.interface';
 })
 export class TotalOrderPipe implements PipeTransform {
 
-  transform(value: ProductElement[] = []): unknown {
+  transform(value: ProductElement[] = []): number {
     return value.reduce((acc, curr) => acc + curr.product.price * curr.quantity, 0)
   }
 

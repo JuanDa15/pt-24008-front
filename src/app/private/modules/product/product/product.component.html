@@ -1,13 +1,97 @@
-<h1>{{ isEditView() ? "Edit" : "Create" }} Product</h1>
+<div class="product-header" [class.center-header]="isEditView() === false">
+  <h1 style="text-align: center; margin-bottom: 0">
+    {{ isEditView() ? "Edit" : "Create" }} Product
+  </h1>
+  @if (isEditView()) {
+  <button
+    type="button"
+    mat-icon-button
+    color="primary"
+    (click)="deleteProduct()"
+    matTooltip="Delete product"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+  }
+</div>
+<hr style="margin: 1rem 0" />
 
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <input placeholder="name" type="text" formControlName="name" />
-  <textarea placeholder="description" formControlName="description"></textarea>
-  <input type="number" placeholder="Price" formControlName="price" />
-  <input type="number" placeholder="Stock" formControlName="stock" />
-  <button type="submit">{{ isEditView() ? "Edit" : "Create" }}</button>
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+  <app-file-input [control]="form.controls.image" />
+
+  <div class="form-grid">
+    <mat-form-field>
+      <mat-label>Product name</mat-label>
+      <input
+        placeholder="Ex. potatoes"
+        matInput
+        type="text"
+        formControlName="name"
+      />
+      @if (fh.checkControlErrors(form.controls.name)) {
+      <mat-error>{{ fh.getControlErrors(form.controls.name) }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input
+        placeholder="description"
+        matInput
+        formControlName="description"
+        placeholder="Ex. Lorem ipsum dolor sit."
+      />
+      @if (fh.checkControlErrors(form.controls.description)) {
+      <mat-error>{{
+        fh.getControlErrors(form.controls.description)
+      }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input
+        type="number"
+        matInput
+        placeholder="Ex. 0"
+        formControlName="price"
+      />
+      <span matTextPrefix>$&nbsp;</span>
+      @if (fh.checkControlErrors(form.controls.price)) {
+      <mat-error>{{ fh.getControlErrors(form.controls.price) }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Stock</mat-label>
+      <input
+        type="number"
+        matInput
+        placeholder="Ex. 10"
+        formControlName="stock"
+      />
+      <mat-icon matSuffix>inventory</mat-icon>
+      @if (fh.checkControlErrors(form.controls.stock)) {
+      <mat-error>{{ fh.getControlErrors(form.controls.stock) }}</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    "
+  >
+    <a mat-stroked-button routerLink="/app/product/list" color="accent"
+      >Cancel</a
+    >
+    <button mat-flat-button color="primary" type="submit">
+      <mat-icon>save</mat-icon>
+      Save
+    </button>
+  </div>
 </form>
-
-@if (isEditView()) {
-<button type="button" (click)="deleteProduct()">Delete Product</button>
-}

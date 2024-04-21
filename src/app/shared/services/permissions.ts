@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { SessionService } from "./session.service";
+import { SessionService } from "../../API/session.service";
 import { User } from "@interfaces/shared.interface";
 
 export class Permissions {

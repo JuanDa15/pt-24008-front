@@ -1,0 +1,19 @@
+.page-wrapper {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+
+  @media screen and (min-width: 748px) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.card {
+  width: 100%;
+
+  @media screen and (min-width: 748px) {
+    max-width: 500px;
+  }
+}

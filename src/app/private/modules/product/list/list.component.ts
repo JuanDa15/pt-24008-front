@@ -1,17 +1,19 @@
-import { CartManagerService } from '@API/cart.service';
-import { Permissions } from '@API/permissions';
+import { CartManagerService } from '@shared/services/cart.service';
+import { Permissions } from '@shared/services/permissions';
 import { ProductService } from '@API/product/product.service';
-import { CurrencyPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '@interfaces/product/product';
 import { ServerResponse } from '@interfaces/shared.interface';
 import { tap } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ProductCardComponent } from '@shared/components/product-card/product-card.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, MatButtonModule, MatIconModule, ProductCardComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })

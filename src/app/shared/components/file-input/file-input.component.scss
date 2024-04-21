@@ -1,0 +1,41 @@
+.file-input-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 500px) {
+    flex-direction: row;
+  }
+
+  .error {
+    &.file-input {
+      border: var(--mat-form-field-error-text-color) !important;
+      color: var(--mat-form-field-error-text-color) !important;
+    }
+  }
+}
+
+.file-input {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid #c2185b;
+  background-color: #ffe0eddc;
+  color: #c2185b;
+  font-weight: 500;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  max-width: 300px;
+
+  &:hover {
+    background-color: #ffbfdadc;
+  }
+}
+
+.preview {
+  border-radius: 12px;
+}

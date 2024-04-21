@@ -1,0 +1,62 @@
+<mat-card class="product">
+  <img
+    mat-card-xl-image
+    [src]="product.image || '/assets/landscape-placeholder.svg'"
+    class="product-img"
+  />
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>
+        <span style="font-size: 2rem">{{ product.name }}</span> /
+        <small>
+          <b>{{ product.stock }} Units</b>
+        </small>
+      </mat-card-title>
+      <mat-card-subtitle> SKU: {{ product._id }} </mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <p style="font-size: 1rem">{{ product.description }}</p>
+
+    <p class="product-price">
+      $ {{ product.price | currency : "COP" : "" : ".0-0" }}
+    </p>
+
+    <mat-card-actions align="end">
+      @if (isAdmin) {
+      <button
+        mat-icon-button
+        type="button"
+        color="accent"
+        matTooltip="Edit product"
+        aria-label="Edit product"
+        [routerLink]="'/app/product/' + product._id"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        color="accent"
+        mat-icon-button
+        type="button"
+        (click)="onDelete.emit()"
+        matTooltip="Delete product"
+        aria-label="Delete product"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      }
+      <span class="example-spacer" style="flex: 1 1 auto"></span>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="onAddToCart.emit()"
+        [disabled]="product.stock === 0"
+        matTooltip="Add to cart"
+        aria-label="Add to cart"
+      >
+        <mat-icon>add_shopping_cart</mat-icon>
+        Add
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/alert-styles.scss";
+
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.content-container {
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+.error-snack.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: #ef9a9a !important;
+}
+.error-snack.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: #d32f2f;
+}
+.error-snack.mat-mdc-snack-bar-container
+  .mat-mdc-button.mat-mdc-snack-bar-action {
+  color: #d32f2f !important;
+}
+
+.info-snack.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: #9fa8da !important;
+}
+.info-snack.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: #303f9f;
+}
+.info-snack.mat-mdc-snack-bar-container
+  .mat-mdc-button.mat-mdc-snack-bar-action {
+  color: #303f9f !important;
+}
+
+.success-snack.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: #a5d6a7 !important;
+}
+.success-snack.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: #388e3c;
+}
+.success-snack.mat-mdc-snack-bar-container
+  .mat-mdc-button.mat-mdc-snack-bar-action {
+  color: #388e3c !important;
+}
+
+.warning-snack.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: #ffab91 !important;
+}
+.warning-snack.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: #e64a19;
+}
+.warning-snack.mat-mdc-snack-bar-container
+  .mat-mdc-button.mat-mdc-snack-bar-action {
+  color: #e64a19 !important;
+}

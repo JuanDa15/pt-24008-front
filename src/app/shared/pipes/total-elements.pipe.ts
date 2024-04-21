@@ -3,7 +3,8 @@ import { ProductElement } from '@interfaces/cart/order.interface';
 
 @Pipe({
   name: 'totalElements',
-  standalone: true
+  standalone: true,
+  pure: false
 })
 export class TotalElementsPipe implements PipeTransform {
 

@@ -1,0 +1,26 @@
+<mat-nav-list>
+  <a
+    mat-list-item
+    (click)="clickedElement.emit()"
+    routerLink="/app/product/list"
+    routerLinkActive="active"
+  >
+    <mat-icon matListItemIcon>menu_book</mat-icon>
+    <span matListItemTitle>Products</span>
+  </a>
+
+  <a
+    mat-list-item
+    (click)="clickedElement.emit()"
+    routerLink="/app/cart/orders"
+    routerLinkActive="active"
+  >
+    <mat-icon matListItemIcon>view_list</mat-icon>
+    <span matListItemTitle>Orders</span>
+  </a>
+
+  <a mat-list-item (click)="clickedElement.emit(); logOut()">
+    <mat-icon matListItemIcon>logout</mat-icon>
+    <span matListItemTitle>Log out</span>
+  </a>
+</mat-nav-list>

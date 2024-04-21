@@ -1,23 +1,26 @@
 import { CartService } from '@API/cart/cart.service';
-import { Permissions } from '@API/permissions';
+import { Permissions } from '@shared/services/permissions';
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from '@interfaces/cart/order.interface';
 import { ServerResponse } from '@interfaces/shared.interface';
 import { tap } from 'rxjs';
-import { TotalOrderPipe } from '../../../../shared/pipes/total-order.pipe';
+import { TotalOrderPipe } from '@shared/pipes/total-order.pipe';
+import { CartCardComponent } from '@shared/components/cart-card/cart-card.component';
+import { TotalElementsPipe } from '@shared/pipes/total-elements.pipe';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [TotalOrderPipe],
+  imports: [TotalOrderPipe, CartCardComponent, TotalElementsPipe, CurrencyPipe],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent extends Permissions implements OnInit {
   public ar = inject(ActivatedRoute)
   public cartService = inject(CartService)
-
+  public router = inject(Router)
   public isEditView = signal<boolean>(false)
   public orderID = signal<string>('')
 
@@ -47,8 +50,9 @@ export class SummaryComponent extends Permissions implements OnInit {
         this.cartService.currentOrder.set(data);
       })
     ).subscribe({
-      next: order => {
-        console.log(order)
+      next: order => { },
+      error: () => {
+        this.router.navigateByUrl('/app/cart/orders', { replaceUrl: true })
       }
     })
   }

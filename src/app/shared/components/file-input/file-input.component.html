@@ -1,0 +1,23 @@
+<div class="file-input-wrapper" [class.error]="fh.checkControlErrors(control)">
+  <label [for]="'file-form-input'" class="file-input">
+    Select an image
+    <input
+      hidden
+      [attr.id]="'file-form-input'"
+      type="file"
+      (change)="onChange($event)"
+      [accept]="validTypes"
+    />
+
+    @if (fh.checkControlErrors(control)) {
+    <mat-error>{{ fh.getControlErrors(control) }}</mat-error>
+    }
+  </label>
+
+  <img
+    class="preview"
+    [src]="base64 || control.value || '/assets/landscape-placeholder.svg'"
+    width="100px"
+    height="100px"
+  />
+</div>

@@ -1,10 +1,40 @@
-<h1>Register</h1>
+<mat-card-title
+  style="font-size: 2rem; text-align: center; margin: 1rem 0 2rem 0"
+>
+  Welcome !!
+</mat-card-title>
+<hr />
+<form class="form" [formGroup]="form" (ngSubmit)="register()">
+  <mat-form-field floatLabel="auto">
+    <mat-label>Name</mat-label>
+    <input placeholder="jhon doe" matInput type="text" formControlName="name" />
+    @if (fh.checkControlErrors(form.controls.name)) {
+    <mat-error>{{ fh.getControlErrors(form.controls.name) }}</mat-error>
+    }
+  </mat-form-field>
 
-<form [formGroup]="form" (ngSubmit)="register()">
-  <input placeholder="email" type="email" formControlName="email" />
-  <input placeholder="password" type="password" formControlName="password" />
-  <input placeholder="name" type="text" formControlName="name" />
-  <button type="submit">Register</button>
+  <mat-form-field floatLabel="auto">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Jhon@doe.com"
+      type="email"
+      formControlName="email"
+    />
+    @if (fh.checkControlErrors(form.controls.email)) {
+    <mat-error>{{ fh.getControlErrors(form.controls.email) }}</mat-error>
+    }
+  </mat-form-field>
+  <app-password-input label="Password" [control]="form.controls.password" />
+  <app-password-input
+    label="Confirm password"
+    [control]="form.controls.confirmPassword"
+  />
+  <div style="text-align: center">
+    <button mat-flat-button color="primary" type="submit">Register</button>
+  </div>
 </form>
 
-<a routerLink="/auth/login">LogIn</a>
+<div style="text-align: center; margin-top: 1rem">
+  <a mat-button color="primary" routerLink="/auth/login"> Sign In </a>
+</div>

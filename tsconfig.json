@@ -29,6 +29,7 @@
       "@environments/*": ["./src/environments/*"],
       "@API/*": ["./src/app/API/*"],
       "@interfaces/*": ["./src/app/interfaces/*"],
+      "@shared/*": ["./src/app/shared/*"],
     }
   },
   "angularCompilerOptions": {

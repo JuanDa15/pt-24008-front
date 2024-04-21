@@ -1,43 +1,39 @@
-<h1>COMPLETE YOUR ORDER</h1>
+<h1 style="text-align: center; font-size: 2rem; font-weight: 500">
+  COMPLETE YOUR ORDER
+</h1>
 
-<!-- QUE SI NO HAY ITEMS SE MUESTRE UN MENSAJE -->
-
-@if (cartService.cart$ | async; as cart) { @for (item of cart; track
-item.product._id) {
-<div>
-  <h4>{{ item.product.name }}</h4>
-  <hr />
-  <p>{{ item.product.description }}</p>
-  <p>{{ item.product.price }}</p>
-  <button type="button" (click)="cartService.removeFromCart(item.product)">
-    Delete
-  </button>
-  <div>
-    <button
-      type="button"
-      (click)="cartService.addToCart(item.product, 1)"
-      [disabled]="item.quantity >= item.product.stock"
-    >
-      +
-    </button>
-    <p>
-      {{ item.quantity }}
-    </p>
-    <button
-      type="button"
-      [disabled]="item.quantity === 1"
-      (click)="cartService.addToCart(item.product, -1)"
-    >
-      -
-    </button>
-  </div>
-</div>
+@if (cartService.cart$ | async; as cart) { @if (cart.length > 0) {
+<section>
+  @for (item of cart; track item.product._id) {
+  <app-cart-card [cartItem]="item" [showControls]="true" />
+  }
+</section>
+} @else {
+<p style="max-width: 600px; margin: 0 auto" class="alert alert-informative">
+  Looks like your cart is feeling a bit empty at the moment! 🛒 Don't worry,
+  there's plenty to explore and add to your cart
+</p>
 }
 
-<h4>Total: {{ cartService.total }}</h4>
+<div class="summary">
+  <h2 style="text-align: center">Order summary</h2>
+  <hr />
+  <p><b>Total elements: </b> {{ cart | totalElements }}</p>
+  <hr />
+  <p><b>Total:</b> {{ cartService.total }}</p>
+</div>
 
-<button type="button" (click)="submit()" [disabled]="cart.length === 0">
-  Order
-</button>
+<div style="text-align: center">
+  <button
+    type="button"
+    mat-flat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="cart.length === 0"
+  >
+    <mat-icon>shopping_cart_checkout</mat-icon>
+    Complete order
+  </button>
+</div>
 
 }

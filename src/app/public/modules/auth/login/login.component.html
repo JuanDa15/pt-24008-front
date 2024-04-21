@@ -1,9 +1,38 @@
-<h1>Login</h1>
+<mat-card-title
+  style="font-size: 2rem; text-align: center; margin: 1rem 0 2rem 0"
+>
+  Welcome back!!
+</mat-card-title>
+<hr />
 
-<form [formGroup]="form" (ngSubmit)="login()">
-  <input placeholder="Email" type="email" formControlName="email" />
-  <input placeholder="********" type="password" formControlName="password" />
-  <button type="submit">Iniciar sesión</button>
+<form class="form" [formGroup]="form" (ngSubmit)="login()">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      placeholder="Ex. jhon@doe.com"
+      type="email"
+      matInput
+      formControlName="email"
+    />
+
+    @if (fh.checkControlErrors(form.controls.email)) {
+    <mat-error>{{ fh.getControlErrors(form.controls.email) }}</mat-error>
+    }
+  </mat-form-field>
+
+  <app-password-input label="Password" [control]="form.controls.password" />
+  <div style="text-align: center">
+    <button
+      style="width: fit-content"
+      mat-flat-button
+      type="submit"
+      color="primary"
+    >
+      Log In
+    </button>
+  </div>
 </form>
 
-<a routerLink="/auth/register">Registrarse</a>
+<div style="text-align: center; margin-top: 1rem">
+  <a mat-button color="primary" routerLink="/auth/register">Register</a>
+</div>

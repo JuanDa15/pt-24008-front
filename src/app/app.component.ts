@@ -1,13 +1,15 @@
 import { RenewService } from '@API/auth/renew.service';
-import { CartManagerService } from '@API/cart.service';
+import { CartManagerService } from '@shared/services/cart.service';
 import { SessionService } from '@API/session.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { LoginResponse, ServerResponse } from '@interfaces/shared.interface';
+import { CloudinaryService } from '@shared/services/cloudinary.service';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -16,6 +18,7 @@ export class AppComponent implements OnInit {
   public sessionService = inject(SessionService)
   public renewSession = inject(RenewService)
   public cartService = inject(CartManagerService)
+  public cloudinary = inject(CloudinaryService)
 
   title = 'pt-24008';
 
@@ -27,7 +30,7 @@ export class AppComponent implements OnInit {
     const token = localStorage.getItem(this.sessionService.STORAGE_TOKEN)
 
     if (!token) {
-      this._router.navigateByUrl('/auth/login', { replaceUrl: true })
+      // this._router.navigateByUrl('/auth/login', { replaceUrl: true })
       return;
     }
 
@@ -37,6 +40,10 @@ export class AppComponent implements OnInit {
         this.cartService.initializeCart()
         this.sessionService.setSession(data)
       },
+      error: () => {
+        this.sessionService.clearSession()
+        this._router.navigateByUrl('/auth/login', { replaceUrl: true })
+      }
     })
   }
 }
